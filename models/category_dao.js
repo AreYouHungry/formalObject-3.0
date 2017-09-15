@@ -7,7 +7,7 @@ module.exports = {
 		});
 	},
 	getCategory: function(params,callback) {
-		db.query("select * from category",params, function(err, result) {
+		db.query("select * from category where 1=1 "+parameter.handleId(params),function(err, result) {
 			callback(err, result);
 		});
 	},
