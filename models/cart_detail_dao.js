@@ -8,7 +8,7 @@ module.exports = {
 		});
 	},
 	getCart_detail: function(params,callback) {
-		db.query("select cart_id,category.id from (cart_detail,category) where category.id=?",params,function(err, result) {
+		db.query("select * from cart_detail where 1=1 "+parameter.handleCustom(params,"cart_id")+parameter.handleCustom(params,"c_id"),function(err, result) {
 			callback(err, result);
 		});
 	},
