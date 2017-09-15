@@ -56,8 +56,11 @@ router.post('/delete', function(req, res, next) {
 	});
 });
 
-router.get("/list",function(req,res){
-	userdao.getUsers(function(err,result){
+router.get("/list/:id",function(req,res){
+	var params={
+		id:req.params.id
+	}
+	userdao.getUsers(params,function(err,result){
 		var o={};
 		o.result=err==null;
 		o.msg=o.result?"查询用户成功!":"查询用户失败!";
