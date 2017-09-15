@@ -7,17 +7,17 @@ module.exports = {
 		});
 	},
 	getCategory: function(params,callback) {
-		db.query("select * from category", function(err, result) {
+		db.query("select * from category",params, function(err, result) {
 			callback(err, result);
 		});
 	},
 	updateCategory: function(params,callback) {
-		db.query("update category set name=name+? where id=?",params, function(err, result) {
+		db.query("update category set name=? where id=?",params, function(err, result) {
 			callback(err, result);
 		});
 	},
 	deleteCategory:function(params,callback){
-		db.query("delete from category where id=?",params,function(err,result){
+		db.query("delete from category where 1=1 and id=?",params,function(err,result){
 			callback(err,result);
 		});
 	}

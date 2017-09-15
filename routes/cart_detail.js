@@ -10,7 +10,7 @@ router.post('/add', function(req, res, next) {
 		console.log(err,result);
 		var o={};
 		o.result=err==null;
-		o.msg=o.result?"增加购物车内容成功!":"增加购物车内容失败!";
+		o.msg=o.result?"增加购物车商品成功!":"增加购物车商品失败!";
 //			result:
 //			msg:"",
 //			data:
@@ -25,7 +25,7 @@ router.post('/update', function(req, res, next) {
 		console.log(err,result);
 	    var o={};
 		o.result=err==null;
-		o.msg=o.result?"更新购物车内容成功!":"更新购物车内容失败!";
+		o.msg=o.result?"更新购物车商品成功!":"更新购物车商品失败!";
 //			result:
 //			msg:"",
 //			data:
@@ -34,13 +34,13 @@ router.post('/update', function(req, res, next) {
 		res.json(o);
 	});
 });
-router.post('/delete', function(req,res,next) {
+router.get('/delete', function(req, res, next) {
 	var params=[];
 	userdao.deleteCart_detail(params, function(err,result){
 		console.log(err,result);
-		var o={};
+	    var o={};
 		o.result=err==null;
-		o.msg=o.result?"清空购物车内容成功!":"清空购物车内容失败!";
+		o.msg=o.result?"删除购物车商品成功!":"删除购物车商品失败!";
 //			result:
 //			msg:"",
 //			data:

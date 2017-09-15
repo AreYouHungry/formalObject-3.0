@@ -2,7 +2,7 @@ var db = require("./db");
 
 module.exports = {
 	addUser: function(params, callback) {
-		db.query("insert into user(name,password,phone,avatar,integral) values(?,?,?,?,?)", params, function(err, result) {
+		db.query("insert into u_order(state,s_time,e_time,total,address,evaluate,user_id,b_id) values(?,?,?,?,?,?,?,?)", params, function(err, result) {
 			callback(err, result);
 		});
 	},
@@ -18,11 +18,6 @@ module.exports = {
 	},
 	deleteUser:function(params,callback){
 		db.query("delete from user where id=?",params,function(err,result){
-			callback(err,result);
-		});
-	},
-	loginUser:function(params,callback){
-	db.query("select * from user where name=? and password=?",params,function(err,result){
 			callback(err,result);
 		});
 	}

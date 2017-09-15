@@ -1,5 +1,6 @@
 var db = require("./db");
-
+var parameter=require('./parameter');
+var async = require("async");
 module.exports = {
 	addCart_detail: function(params, callback) {
 		db.query("insert into cart_detail(cart_id,c_id,amount) values(?,?,?)", params, function(err, result) {
@@ -7,17 +8,41 @@ module.exports = {
 		});
 	},
 	getCart_detail: function(params,callback) {
-		db.query("select * from cart_detail", function(err, result) {
+		db.query("select cart_id,category.id from (cart_detail,category) where category.id=?",params,function(err, result) {
 			callback(err, result);
 		});
 	},
-	updateCart_detail: function(params, callback) {
-		db.query("update cart_detail set amount=? where id=?",params, function(err, result) {
-			callback(err, result);
+	finishCart_detail: function(params, callback) {
+		connection.beginTransaction(function() {
+			async.series([
+					function(cb) {
+						connection.query("delete from cart_detail", function(err, result) {
+							cb(err, result);
+						});
+					},
+					function(cb) {
+						connection.query("select * from v_news", function(err, result) {
+							cb(err, result);
+						});
+					}
+				],
+				function(err, result) {
+					if(err) {
+						connection.rollback();
+						console.log("Rollback...");
+					} else {
+						connection.commit();
+						console.log("Commit...");
+					}
+					callback(err, result);
+					connection.end();
+				});
+
 		});
+
 	},
-	delCart_detail:function(params,callback){
-		db.query("delete from cate_detail",params,function(err,result){
+	deleteCart_detail:function(params,callback){
+		db.query("delete from cart_detail",params,function(err,result){
 			callback(err,result);
 		});
 	}

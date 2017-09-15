@@ -1,4 +1,4 @@
-var mysql = require("mysql");
+var mysql=require("mysql");
 
 /*创建数据库连接对象*/
 var connection = mysql.createConnection({
@@ -8,4 +8,4 @@ var connection = mysql.createConnection({
 	database: 'dingcan' //数据库名
 });
 connection.connect(); //连接数据库
-module.exports = connection;
+module.exports=connection;

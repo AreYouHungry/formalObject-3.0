@@ -1,24 +1,20 @@
 var db = require("./db");
-
+var parameter=require('./parameter');
 module.exports = {
-	addConnection: function(params, callback) {
+	addCollection: function(params,callback) {
 		db.query("insert into collection(c_id,user_id,state) values(?,?,?)", params, function(err, result) {
 			callback(err, result);
 		});
 	},
-	getConnection: function(params,callback) {
-		db.query("select * from collection", function(err, result) {
+	getCollection: function(params,callback) {
+		db.query("select * from collection where 1=1 "+parameter.handleCustom(params,"user_id")+parameter.handleCustom(params,"state"), function(err, result) {
+			console.log("select * from collection where 1=1 "+parameter.handleCustom(params,"user_id")+parameter.handleCustom(params,"state"));
 			callback(err, result);
 		});
 	},
-	updateConnection: function(params,callback) {
-		db.query("update collection set state=? where id=?",params, function(err, result) {
+	updateCollection: function(params,callback) {
+		db.query("update collection set state=? where id=?",params,function(err,result) {
 			callback(err, result);
-		});
-	},
-	deleteConnection:function(params,callback){
-		db.query("delete from collection where 1=1+c_id=? and user_id=?",params,function(err,result){
-			callback(err,result);
 		});
 	}
 }
