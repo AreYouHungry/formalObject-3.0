@@ -19,6 +19,7 @@ router.post('/add', function(req, res, next) {
 		res.json(o);
 	});
 });
+
 router.get("/list/:id",function(req,res){
     var id=req.params.id;
 	userdao.getCart(function(err,result){
