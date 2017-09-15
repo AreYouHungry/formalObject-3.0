@@ -1,13 +1,18 @@
 var db = require("./db");
-
+var parameter=require("./parameter");
 module.exports = {
 	addUser: function(params, callback) {
 		db.query("insert into user(name,password,phone,avatar,integral) values(?,?,?,?,?)", params, function(err, result) {
 			callback(err, result);
 		});
 	},
-	getUsers: function(params,callback) {
-		db.query("select * from user",params,function(err, result) {
+	getUsers: function(params,callback) {//根据Id查用户
+		db.query("select * from user where 1=1 "+parameter.handleId(params),function(err, result) {
+			callback(err, result);
+		});
+	},
+	getUsersByPage: function(page,pagesize,callback) {//根据页码查用户
+		db.query("select * from user where 1=1 limit "+(page-1)*pagesize+","+pagesize,function(err, result) {
 			callback(err, result);
 		});
 	},
