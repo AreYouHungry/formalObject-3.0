@@ -8,7 +8,6 @@ module.exports = {
 	},
 	getCollection: function(params,callback) {
 		db.query("select * from collection where 1=1 "+parameter.handleCustom(params,"user_id")+parameter.handleCustom(params,"state"), function(err, result) {
-			console.log("select * from collection where 1=1 "+parameter.handleCustom(params,"user_id")+parameter.handleCustom(params,"state"));
 			callback(err, result);
 		});
 	},
